@@ -7,13 +7,11 @@ public class Authentication {
         ArrayList<UserAccount> accounts = AccountDatabase.getUserAccounts();
 
         for(UserAccount user:accounts) {
-            if (user.getUserName().equals(userName)) {
-                return false;
-            } else if (user.getPassword().equals(password)) {
-                return false;
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean nameAvailable(String userName){

@@ -1,5 +1,9 @@
 package PCard.Domain;
 
+import PCard.Controllers.CapitalOneAPIController;
+
+import java.io.IOException;
+
 public class UserAccount {
     private double balance;
     private String userID, accountID,userName,password,email;
@@ -62,6 +66,14 @@ public class UserAccount {
         authenticated = Authentication.authenticate(userName,password);
     }
 
+    public Long checkBalance() throws IOException {
+        if (authenticated == true) {
+            return CapitalOneAPIController.checkBalance(accountID);
+        }
+        else {
+            return null;
+        }
+    }
 
 
 }
