@@ -1,8 +1,9 @@
-package Partayyy;
+package PCard;
 
 public class UserAccount {
-    double balance;
-    String userID, accountID,userName,password,email;
+    private double balance;
+    private String userID, accountID,userName,password,email;
+    private boolean authenticated = false;
 
     public UserAccount(String userName, String email, String password) {
         this.userName = userName;
@@ -45,7 +46,7 @@ public class UserAccount {
         this.userName = userName;
     }
 
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 
@@ -56,4 +57,11 @@ public class UserAccount {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public void authenticateUser(String userName, String password) {
+        authenticated = Authentication.authenticate(userName,password);
+    }
+
+
+
 }
