@@ -1,8 +1,5 @@
-package PCard;
+package PCard.Controllers;
 
-import PCard.UserAccount;
-import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -12,7 +9,7 @@ import java.net.URL;
 import java.net.URLConnection;
 
 @RestController
-public class AccountCreationController {
+public class CapitalOneAPIController {
     private static String getUrlSource(String url) throws IOException {
         URL theURL = new URL(url);
         URLConnection urlC = theURL.openConnection();

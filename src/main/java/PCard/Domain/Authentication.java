@@ -1,4 +1,4 @@
-package PCard;
+package PCard.Domain;
 
 import java.util.ArrayList;
 

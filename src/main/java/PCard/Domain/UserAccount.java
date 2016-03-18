@@ -1,4 +1,4 @@
-package PCard;
+package PCard.Domain;
 
 public class UserAccount {
     private double balance;
