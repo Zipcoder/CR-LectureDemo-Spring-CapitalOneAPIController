@@ -8,34 +8,21 @@ import java.util.Map;
 
 @RestController
 public class AccountCreationController {
-    @RequestMapping("/createaccountOne")
-    public UserAccount userAccount(@RequestParam(value="accountname", defaultValue="ERROR") String accountname) {
-        boolean nameAvail = Authenticate.authenticate(accountname);
-        if (nameAvail){
-            UserAccount userToAdd = new UserAccount(accountname);
-            AccountDatabase.addUserToDB(userToAdd);
-            return userToAdd;
-        }
-        else{
-            return new UserAccount("error");
-        }
-    }
-    @RequestMapping(value = "newuser")
+    @RequestMapping(value = "newuser",method = RequestMethod.POST)
     public UserAccount createUser(@RequestParam Map<String,String> requestParams) throws Exception{
         String email=requestParams.get("email");
         String password=requestParams.get("password");
-        String username = requestParams.get("username");
+        String username=requestParams.get("username");
+
         //perform DB operations
-        boolean nameAvail = Authenticate.authenticate(username);
-        if (nameAvail){
+        if (Authenticate.authUsername(username)&&Authenticate.authEmail(email)&&Authenticate.authPassword(password)){
             UserAccount userToAdd = new UserAccount(username,email,password);
             AccountDatabase.addUserToDB(userToAdd);
             return userToAdd;
         }
+
         else {
             return new UserAccount("error");
         }
     }
-
-
 }
