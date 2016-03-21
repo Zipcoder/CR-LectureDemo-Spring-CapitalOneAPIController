@@ -38,7 +38,7 @@ public class Authenticate {
     public static boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException|NullPointerException e) {
             return false;
         }
         return true;
@@ -47,7 +47,7 @@ public class Authenticate {
     public static boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException|NullPointerException e) {
             return false;
         }
         return true;

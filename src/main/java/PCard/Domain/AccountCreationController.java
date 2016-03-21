@@ -1,4 +1,4 @@
-package PCard.Controllers;
+package PCard.Domain;
 import PCard.Domain.AccountDatabase;
 import PCard.Domain.Authenticate;
 import PCard.Domain.UserAccount;
@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.Map;
 
 @RestController
@@ -17,7 +16,7 @@ public class AccountCreationController {
         String password=requestParams.get("password");
         String username=requestParams.get("username");
         String accountnumber=requestParams.get("accountnumber");
-        String monthlybudget=requestParams.get("montlybudget");
+        String monthlybudget=requestParams.get("monthlybudget");
         String partynightsperweek=requestParams.get("partynightsperweek");
 
         //perform DB operations
