@@ -22,7 +22,7 @@ public class AccountCreationController {
         //perform DB operations
         if (Authenticate.authUsername(username)&&Authenticate.authEmail(email)&&Authenticate.authPassword(password)
                 &&Authenticate.isDouble(monthlybudget)&&Authenticate.isInteger(partynightsperweek)){
-            UserAccount userToAdd = new UserAccount(username,email,password);
+            UserAccount userToAdd = new UserAccount(username,email,password,monthlybudget,partynightsperweek,accountnumber);
             AccountDatabase.addUserToDB(userToAdd);
             return userToAdd;
         }
