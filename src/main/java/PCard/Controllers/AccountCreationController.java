@@ -1,6 +1,8 @@
-package Partayyy;
+package PCard.Controllers;
+import PCard.Domain.AccountDatabase;
+import PCard.Domain.Authenticate;
+import PCard.Domain.UserAccount;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
