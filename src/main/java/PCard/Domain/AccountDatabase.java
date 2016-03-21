@@ -1,19 +1,12 @@
 package PCard.Domain;
-import java.util.ArrayList;
 
-public class AccountDatabase {
-    private static ArrayList<UserAccount> userAccounts = new ArrayList<UserAccount>();
-    AccountDatabase(){
-        userAccounts.add(new UserAccount("jimbob"));
-        userAccounts.add(new UserAccount("joe"));
-    }
+import org.springframework.data.repository.CrudRepository;
 
-    public static void addUserToDB(UserAccount userToAdd){
-        userAccounts.add(userToAdd);
-    }
+import java.util.List;
 
-    public static ArrayList<UserAccount> getUserAccounts(){
-        return userAccounts;
-    }
+public interface AccountDatabase extends CrudRepository<UserAccount, Long> {
 
+    List<UserAccount> findByUserName(String userName);
+    List<UserAccount> findByEmail(String email);
+    List<UserAccount> findByAccountID(String accountID);
 }

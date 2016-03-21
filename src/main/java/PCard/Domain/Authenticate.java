@@ -1,53 +1,68 @@
 package PCard.Domain;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 
 public class Authenticate {
-    public static boolean authUsername(String userName) {
+
+    @Autowired
+    private AccountDatabase accountDatabase;
+
+    private static Authenticate instance;
+
+    private Authenticate(){};
+
+    public static Authenticate getInstance(){
+        if(instance == null){
+            instance = new Authenticate();
+        }
+        return instance;
+    }
+
+    public boolean authenticate(String userName, String password){
+        ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
+
+        for(UserAccount user:accounts) {
+            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean authUsername(String userName) {
         if (userName == null) {
             return false;
         }
 
-        //REPLACE THIS BIT WITH DB LOOKUP METHOD
-        ArrayList<UserAccount> accounts = AccountDatabase.getUserAccounts();
-        if (accounts.contains(userName)) {
-            return false;
-        }
-
         if (userName.matches("^[\\w]{6,15}")) {
-            return true;
+            ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
+            return !accounts.isEmpty();
         }
-        return false;
+        else return false;
     }
 
-    public static boolean authEmail(String email) {
+    public boolean authEmail(String email) {
         if (email == null) {
             return false;
         }
 
-        //REPLACE THIS BIT WITH DB LOOKUP METHOD
-        ArrayList<UserAccount> accounts = AccountDatabase.getUserAccounts();
-        if (accounts.contains(email)) {
-            return false;
-        }
-
         if (email.matches("[A-Za-z_0-9.%+-]{1,50}@[A-Za-z0-9.-]{1,50}\\.[a-zA-Z]{2,3}")) {
-            return true;
+            ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByEmail(email);
+            return !accounts.isEmpty();
         }
-        return false;
+        else return false;
     }
 
-    public static boolean authPassword(String password) {
+    public boolean authPassword(String password) {
         if (password == null) {
             return false;
         }
         if (password.matches("^[\\w]{6,20}")) {
             return true;
         }
-        return false;
+        else return false;
     }
 
-    public static boolean isDouble(String input) {
+    public boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
         } catch (NumberFormatException | NullPointerException e) {
@@ -56,7 +71,7 @@ public class Authenticate {
         return true;
     }
 
-    public static boolean isInteger(String input) {
+    public boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException | NullPointerException e) {

@@ -20,8 +20,9 @@ public class AccountCreationController {
         String partynightsperweek=requestParams.get("partynightsperweek");
 
         //perform DB operations
-        if (Authenticate.authUsername(username)&&Authenticate.authEmail(email)&&Authenticate.authPassword(password)
-                &&Authenticate.isDouble(monthlybudget)&&Authenticate.isInteger(partynightsperweek)){
+        Authenticate authenticator = Authenticate.getInstance();
+        if (authenticator.authUsername(username)&&authenticator.authEmail(email)&&authenticator.authPassword(password)
+                &&authenticator.isDouble(monthlybudget)&&authenticator.isInteger(partynightsperweek)){
             UserAccount userToAdd = new UserAccount(username,email,password,monthlybudget,partynightsperweek,accountnumber);
             AccountDatabase.addUserToDB(userToAdd);
             return userToAdd;
