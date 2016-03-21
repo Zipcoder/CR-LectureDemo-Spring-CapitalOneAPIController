@@ -2,6 +2,7 @@ package PCard.Controllers;
 import PCard.Domain.AccountDatabase;
 import PCard.Domain.Authenticate;
 import PCard.Domain.UserAccount;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,6 +11,9 @@ import java.util.Map;
 
 @RestController
 public class AccountCreationController {
+    @Autowired
+    AccountDatabase accountDatabase;
+
     @RequestMapping(value = "newuser",method = RequestMethod.POST)
     public UserAccount createUser(@RequestParam Map<String,String> requestParams) throws Exception{
         String email=requestParams.get("email");
@@ -24,7 +28,7 @@ public class AccountCreationController {
         if (authenticator.authUsername(username)&&authenticator.authEmail(email)&&authenticator.authPassword(password)
                 &&authenticator.isDouble(monthlybudget)&&authenticator.isInteger(partynightsperweek)){
             UserAccount userToAdd = new UserAccount(username,email,password,monthlybudget,partynightsperweek,accountnumber);
-            AccountDatabase.addUserToDB(userToAdd);
+            accountDatabase.save(userToAdd);
             return userToAdd;
         }
 
