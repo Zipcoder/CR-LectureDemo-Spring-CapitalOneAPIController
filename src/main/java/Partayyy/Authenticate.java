@@ -35,4 +35,22 @@ public class Authenticate {
         }
         return false;
     }
+
+    public static boolean isDouble(String input){
+        try{
+            Double.parseDouble(input);
+        }catch(NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isInteger(String input){
+        try{
+            Integer.parseInt(input);
+        }catch(NumberFormatException e){
+            return false;
+        }
+        return true;
+    }
 }

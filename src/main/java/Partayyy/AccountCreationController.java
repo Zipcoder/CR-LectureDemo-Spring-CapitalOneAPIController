@@ -13,9 +13,13 @@ public class AccountCreationController {
         String email=requestParams.get("email");
         String password=requestParams.get("password");
         String username=requestParams.get("username");
+        String accountnumber=requestParams.get("accountnumber");
+        String monthlybudget=requestParams.get("montlybudget");
+        String partynightsperweek=requestParams.get("partynightsperweek");
 
         //perform DB operations
-        if (Authenticate.authUsername(username)&&Authenticate.authEmail(email)&&Authenticate.authPassword(password)){
+        if (Authenticate.authUsername(username)&&Authenticate.authEmail(email)&&Authenticate.authPassword(password)
+                &&Authenticate.isDouble(monthlybudget)&&Authenticate.isInteger(partynightsperweek)){
             UserAccount userToAdd = new UserAccount(username,email,password);
             AccountDatabase.addUserToDB(userToAdd);
             return userToAdd;
