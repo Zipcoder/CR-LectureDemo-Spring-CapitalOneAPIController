@@ -3,6 +3,9 @@ import java.util.ArrayList;
 
 public class Authenticate {
     public static boolean authUsername(String userName) {
+        if (userName==null){
+            return false;
+        }
         //REPLACE THIS BIT WITH DB LOOKUP METHOD
         ArrayList<UserAccount> accounts = AccountDatabase.getUserAccounts();
         if (accounts.contains(userName)) {
@@ -16,6 +19,9 @@ public class Authenticate {
     }
 
     public static boolean authEmail(String email) {
+        if (email==null){
+            return false;
+        }
         //REPLACE THIS BIT WITH DB LOOKUP METHOD
         ArrayList<UserAccount> accounts = AccountDatabase.getUserAccounts();
         if (accounts.contains(email)) {
@@ -29,6 +35,9 @@ public class Authenticate {
     }
 
     public static boolean authPassword(String password) {
+        if (password==null){
+            return false;
+        }
         if (password.matches("^[\\w]{6,20}")) {
             return true;
         }
