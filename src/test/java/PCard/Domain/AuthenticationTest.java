@@ -17,12 +17,12 @@ public class AuthenticationTest {
 
     @BeforeClass
     public static void setup() throws IOException {
-        user = UserAccount.createAccount("Drury", "pass3","bob@email.com", "56c66be6a73e492741507f89");
+        user = AccountCreationController.createUser("Drury", "pass3","bob@email.com", "56c66be6a73e492741507f89");
     }
 
     @Before
     public void testAuthenticate() throws Exception {
-        assertEquals(true, Authentication.authenticate("Drury","pass3"));
+        assertEquals(true, Authenticate.getInstance().authenticate("Drury","pass3"));
     }
 
     @Test

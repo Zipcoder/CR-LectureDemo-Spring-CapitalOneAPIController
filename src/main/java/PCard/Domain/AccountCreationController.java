@@ -1,8 +1,5 @@
-import org.springframework.beans.factory.annotation.Autowired;
 package PCard.Domain;
-import PCard.Domain.AccountDatabase;
-import PCard.Domain.Authenticate;
-import PCard.Domain.UserAccount;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,40 +13,38 @@ public class AccountCreationController {
     AccountDatabase accountDatabase;
 
     @RequestMapping("/createaccountOne")
-    public UserAccount userAccount(@RequestParam(value="accountname", defaultValue="ERROR") String accountname) {
-        boolean nameAvail = Authenticate.getInstance().userDoesNotExist(accountname);
-        if (nameAvail){
+    public UserAccount userAccount(@RequestParam(value = "accountname", defaultValue = "ERROR") String accountname) {
+        boolean nameAvail = Authenticate.getInstance().authUsername(accountname);
+        if (nameAvail) {
             UserAccount userToAdd = new UserAccount(accountname);
             accountDatabase.save(userToAdd);
             return userToAdd;
-        }
-        else{
+        } else {
             return new UserAccount("error");
         }
     }
-    @RequestMapping(value = "newuser",method = RequestMethod.POST)
-    public UserAccount createUser(@RequestParam Map<String,String> requestParams) throws Exception{
-        String email=requestParams.get("email");
-        String password=requestParams.get("password");
-        String username=requestParams.get("username");
-        String accountnumber=requestParams.get("accountnumber");
-        String monthlybudget=requestParams.get("monthlybudget");
-        String partynightsperweek=requestParams.get("partynightsperweek");
+
+    @RequestMapping(value = "newuser", method = RequestMethod.POST)
+    public UserAccount createUser(@RequestParam Map<String, String> requestParams) throws Exception {
+        String email = requestParams.get("email");
+        String password = requestParams.get("password");
+        String username = requestParams.get("username");
+        String accountnumber = requestParams.get("accountnumber");
+        String monthlybudget = requestParams.get("monthlybudget");
+        String partynightsperweek = requestParams.get("partynightsperweek");
+        Authenticate authenticate = Authenticate.getInstance();
 
         //perform DB operations
-        boolean nameAvail = Authenticate.getInstance().userDoesNotExist(username);
-        if (nameAvail){
-        if (Authenticate.authUsername(username)&&Authenticate.authEmail(email)&&Authenticate.authPassword(password)
-                &&Authenticate.isDouble(monthlybudget)&&Authenticate.isInteger(partynightsperweek)){
-            UserAccount userToAdd = new UserAccount(username,email,password);
-            accountDatabase.save(userToAdd);
-            return userToAdd;
+        boolean nameAvail = authenticate.authUsername(username);
+        if (nameAvail) {
+            if (authenticate.authUsername(username) && authenticate.authEmail(email) && authenticate.authPassword(password)
+                    && authenticate.isDouble(monthlybudget) && authenticate.isInteger(partynightsperweek)) {
+                UserAccount userToAdd = new UserAccount(username, email, password);
+                accountDatabase.save(userToAdd);
+                return userToAdd;
+            }
         }
+        return new UserAccount("error");
 
-        else {
-            return new UserAccount("error");
-        }
     }
-
-
 }
