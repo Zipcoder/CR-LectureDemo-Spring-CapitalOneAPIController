@@ -1,8 +1,21 @@
 package PCard.Domain;
 
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class UserAccount {
     double balance;
-    String userID, accountID,userName,password,email;
+    private String userID, accountID,userName,password,email;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+
+    protected UserAccount(){}
 
     public UserAccount(String userName, String email, String password) {
         this.userName = userName;
@@ -55,5 +68,12 @@ public class UserAccount {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+                "UserAccount[id=%d, firstName='%s', lastName='%s']",
+                id, userName, email);
     }
 }
