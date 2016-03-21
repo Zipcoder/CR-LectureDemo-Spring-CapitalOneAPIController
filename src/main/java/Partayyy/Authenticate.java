@@ -1,16 +1,34 @@
 package Partayyy;
 
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
 
 public class Authenticate {
 
-    @Bean
-    public CommandLineRunner authenticate(AccountDatabase database){
-        return (args) -> {
-            UserAccount user = database.findByUserName();
-            if (user.getPassword().equals()) return true;
-            else return false;
-        };
+    @Autowired
+    private AccountDatabase accountDatabase;
+
+    private static Authenticate instance;
+
+    private Authenticate(){};
+
+    public static Authenticate getInstance(){
+        if(instance == null){
+            instance = new Authenticate();
+        }
+        return instance;
     }
+
+    public boolean userDoesNotExist(String userName){
+        ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
+
+        for(UserAccount user:accounts){
+            if(user.getUserName().equals(userName)){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
