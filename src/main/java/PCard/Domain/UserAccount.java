@@ -1,4 +1,4 @@
-package Partayyy;
+package PCard.Domain;
 
 public class UserAccount {
     double balance;
