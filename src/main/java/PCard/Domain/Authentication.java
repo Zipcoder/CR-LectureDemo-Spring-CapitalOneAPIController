@@ -24,4 +24,14 @@ public class Authentication {
         }
         return true;
     }
+    public static boolean emailAvailable(String email){
+        ArrayList<UserAccount> accounts = AccountDatabase.getUserAccounts();
+
+        for(UserAccount user:accounts) {
+            if (user.getEmail().equals(email)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

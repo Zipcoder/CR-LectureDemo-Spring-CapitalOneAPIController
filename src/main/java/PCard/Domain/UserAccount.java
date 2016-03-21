@@ -1,6 +1,7 @@
 package PCard.Domain;
 
 import PCard.Controllers.CapitalOneAPIController;
+import org.apache.catalina.User;
 
 import java.io.IOException;
 
@@ -9,17 +10,20 @@ public class UserAccount {
     private String userID, accountID,userName,password,email;
     private boolean authenticated = false;
 
-    public UserAccount(String userName, String email, String password) {
-        this.userName = userName;
-        this.email = email;
-        this.password = password;
-    }
-    public UserAccount(String userName){
-        this.userName=userName;
+
+    private UserAccount(String userName, String password, String email, String accountID) throws IOException{
+            this.userName = userName;
+            this.email = email;
+            this.password = password;
+            this.balance = CapitalOneAPIController.checkBalance(accountID);
+            AccountDatabase.addUserToDB(this);
     }
 
-    public double getBalance() {
-        return balance;
+    public static UserAccount createAccount(String userName, String password, String email, String accountID) throws IOException {
+        if (Authentication.nameAvailable(userName) && Authentication.emailAvailable(email)) {
+            return new UserAccount(userName, password, email, accountID);
+        }
+        return null;
     }
 
     public void setBalance(double balance) {
@@ -65,15 +69,10 @@ public class UserAccount {
     public void authenticateUser(String userName, String password) {
         authenticated = Authentication.authenticate(userName,password);
     }
-
-    public Long checkBalance() throws IOException {
-        if (authenticated == true) {
-            return CapitalOneAPIController.checkBalance(accountID);
-        }
-        else {
-            return null;
-        }
+    public boolean checkAuthentication() {
+        return authenticated;
     }
-
-
+    public double checkBalance() throws IOException {
+        return this.balance;
+    }
 }
