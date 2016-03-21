@@ -1,4 +1,4 @@
-package PCard.Domain;
+package PCard.Controllers;
 import PCard.Domain.AccountDatabase;
 import PCard.Domain.Authenticate;
 import PCard.Domain.UserAccount;

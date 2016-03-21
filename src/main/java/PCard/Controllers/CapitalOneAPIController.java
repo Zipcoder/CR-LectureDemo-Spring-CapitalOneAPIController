@@ -1,4 +1,4 @@
-package PCard.Domain;
+package PCard.Controllers;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
