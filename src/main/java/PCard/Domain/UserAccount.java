@@ -9,6 +9,7 @@ public class UserAccount {
     private double balance, monthlyBudget;
     private int partyNights;
     private String userID, accountID,userName,password,email,accountNumber;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

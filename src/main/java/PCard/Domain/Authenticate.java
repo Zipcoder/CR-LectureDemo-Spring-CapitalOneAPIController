@@ -35,7 +35,7 @@ public class Authenticate {
 
         if (userName.matches("^[\\w]{6,15}")) {
             ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
-            return !accounts.isEmpty();
+            return accounts.isEmpty();
         }
         else return false;
     }
@@ -47,7 +47,7 @@ public class Authenticate {
 
         if (email.matches("[A-Za-z_0-9.%+-]{1,50}@[A-Za-z0-9.-]{1,50}\\.[a-zA-Z]{2,3}")) {
             ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByEmail(email);
-            return !accounts.isEmpty();
+            return accounts.isEmpty();
         }
         else return false;
     }
