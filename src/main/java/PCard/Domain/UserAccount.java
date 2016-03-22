@@ -32,8 +32,6 @@ public class UserAccount {
         this.userName=userName;
     }
 
-    public double getMonthlyBudget() {return monthlyBudget;}
-
     public void setMonthlyBudget(double monthlyBudget) {this.monthlyBudget = monthlyBudget;}
 
     public void setEmail(String email) {this.email = email;}
@@ -89,12 +87,21 @@ public class UserAccount {
     public void authenticateUser(String userName, String password) {
         authenticated = Authenticate.authenticate(userName,password);
     }
+
     public boolean checkAuthentication() {
         return authenticated;
     }
+
     public double checkBalance() throws IOException {
         if (authenticated == true) {
             return CapitalOneAPIController.checkBalance(accountNumber);
+        }
+        return 0.0;
+    }
+
+    public double checkBudget() throws IOException {
+        if (authenticated == true) {
+            return monthlyBudget;
         }
         return 0.0;
     }
