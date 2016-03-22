@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by rkelly on 3/18/16.
  */
 public class UserAccountTest {
-/*
+
     static UserAccount user;
 
     @BeforeClass
@@ -20,7 +20,7 @@ public class UserAccountTest {
         user = UserAccount.createAccount("Drury", "pass3","bob@email.com", "56c66be6a73e492741507f89");
     }
 
-    @Before
+    @Test
     public void testAuthenticateUser() throws Exception {
         user.authenticateUser(user.getUserName(),user.getPassword());
         assertEquals(true,user.checkAuthentication());
@@ -83,6 +83,6 @@ public class UserAccountTest {
         assertEquals("pass2",user.getPassword());
     }
 
-*/
+
 
 }

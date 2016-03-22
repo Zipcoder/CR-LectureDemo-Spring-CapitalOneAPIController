@@ -1,4 +1,3 @@
-
 package PCard.Domain;
 
 import org.junit.BeforeClass;
@@ -11,7 +10,6 @@ import static org.junit.Assert.*;
 /**
  * Created by rkelly on 3/21/16.
  */
-/*
 public class AccountDatabaseTest {
 
     static UserAccount user;
@@ -30,4 +28,4 @@ public class AccountDatabaseTest {
     public void testGetUserAccounts() throws Exception {
         //Forced to test in testAddUserToDB
     }
-}*/
+}
