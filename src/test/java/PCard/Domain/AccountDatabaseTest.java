@@ -1,7 +1,9 @@
 package PCard.Domain;
 
+import PCard.Controllers.AccountCreationController;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
@@ -18,7 +20,7 @@ public class AccountDatabaseTest {
     @BeforeClass
     public static void setup() throws IOException {
         AccountCreationController accountCreationController = new AccountCreationController();
-        user = accountCreationController.userAccount("Drury");
+        //user = accountCreationController.createUser();
     }
 
     @Test
