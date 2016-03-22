@@ -1,9 +1,7 @@
 package PCard.Domain;
 
-import PCard.Controllers.AccountCreationController;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 

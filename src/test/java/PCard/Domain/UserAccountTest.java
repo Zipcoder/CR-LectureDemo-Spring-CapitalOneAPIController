@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
  * Created by rkelly on 3/18/16.
  */
 public class UserAccountTest {
-
+/*
     static UserAccount user;
 
     @BeforeClass
@@ -83,6 +83,6 @@ public class UserAccountTest {
         assertEquals("pass2",user.getPassword());
     }
 
-
+*/
 
 }

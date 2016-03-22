@@ -1,5 +1,6 @@
 package PCard.Controllers;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -8,6 +9,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
 
+@ComponentScan
 @RestController
 public class CapitalOneAPIController {
     private static String getUrlSource(String url) throws IOException {

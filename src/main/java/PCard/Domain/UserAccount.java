@@ -1,28 +1,47 @@
 package PCard.Domain;
-
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @Table(name="users")
 public class UserAccount {
-    double balance;
-    private String userID, accountID,userName,password,email;
+    private double balance, monthlyBudget;
+    private int partyNights;
+    private String userID, accountID,userName,password,email,accountNumber;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
     protected UserAccount(){}
 
-    public UserAccount(String userName, String email, String password) {
+    public UserAccount(String userName, String email, String password, String monthlyBudget, String partyNights, String accountNumber) {
         this.userName = userName;
         this.email = email;
         this.password = password;
+        this.monthlyBudget = Double.parseDouble(monthlyBudget);
+        this.partyNights = Integer.parseInt(partyNights);
+        this.accountNumber = accountNumber;
     }
+
     public UserAccount(String userName){
         this.userName=userName;
     }
+
+    public double getMonthlyBudget() {return monthlyBudget;}
+
+    public void setMonthlyBudget(double monthlyBudget) {this.monthlyBudget = monthlyBudget;}
+
+    public void setEmail(String email) {this.email = email;}
+
+    public String getAccountNumber() {return accountNumber;}
+
+    public void setAccountNumber(String accountNumber) {this.accountNumber = accountNumber;}
+
+    public int getPartyNights() {return partyNights;}
+
+    public void setPartyNights(int partyNights) {this.partyNights = partyNights;}
 
     public double getBalance() {
         return balance;

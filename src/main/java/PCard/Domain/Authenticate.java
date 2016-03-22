@@ -1,7 +1,5 @@
 package PCard.Domain;
-
 import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.ArrayList;
 
 public class Authenticate {
@@ -19,6 +17,7 @@ public class Authenticate {
         }
         return instance;
     }
+
     public boolean authenticate(String userName, String password){
         ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
 
@@ -36,7 +35,7 @@ public class Authenticate {
 
         if (userName.matches("^[\\w]{6,15}")) {
             ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
-            return !accounts.isEmpty();
+            return accounts.isEmpty();
         }
         else return false;
     }
@@ -46,10 +45,9 @@ public class Authenticate {
             return false;
         }
 
-
         if (email.matches("[A-Za-z_0-9.%+-]{1,50}@[A-Za-z0-9.-]{1,50}\\.[a-zA-Z]{2,3}")) {
             ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByEmail(email);
-            return !accounts.isEmpty();
+            return accounts.isEmpty();
         }
         else return false;
     }

@@ -11,43 +11,29 @@ import java.util.Map;
 
 @RestController
 public class AccountCreationController {
-
     @Autowired
     AccountDatabase accountDatabase;
 
-    @RequestMapping("/createaccountOne")
-    public UserAccount userAccount(@RequestParam(value = "accountname", defaultValue = "ERROR") String accountname) {
-        boolean nameAvail = Authenticate.getInstance().authUsername(accountname);
-        if (nameAvail) {
-            UserAccount userToAdd = new UserAccount(accountname);
-            accountDatabase.save(userToAdd);
-            return userToAdd;
-        } else {
-            return new UserAccount("error");
-        }
-    }
-
-    @RequestMapping(value = "newuser", method = RequestMethod.POST)
-    public UserAccount createUser(@RequestParam Map<String, String> requestParams) throws Exception {
-        String email = requestParams.get("email");
-        String password = requestParams.get("password");
-        String username = requestParams.get("username");
-        String accountnumber = requestParams.get("accountnumber");
-        String monthlybudget = requestParams.get("monthlybudget");
-        String partynightsperweek = requestParams.get("partynightsperweek");
-        Authenticate authenticate = Authenticate.getInstance();
+    @RequestMapping(value = "newuser",method = RequestMethod.POST)
+    public UserAccount createUser(@RequestParam Map<String,String> requestParams) throws Exception{
+        String email=requestParams.get("email");
+        String password=requestParams.get("password");
+        String username=requestParams.get("username");
+        String accountnumber=requestParams.get("accountnumber");
+        String monthlybudget=requestParams.get("monthlybudget");
+        String partynightsperweek=requestParams.get("partynightsperweek");
 
         //perform DB operations
-        boolean nameAvail = authenticate.authUsername(username);
-        if (nameAvail) {
-            if (authenticate.authUsername(username) && authenticate.authEmail(email) && authenticate.authPassword(password)
-                    && authenticate.isDouble(monthlybudget) && authenticate.isInteger(partynightsperweek)) {
-                UserAccount userToAdd = new UserAccount(username, email, password);
-                accountDatabase.save(userToAdd);
-                return userToAdd;
-            }
+        Authenticate authenticator = Authenticate.getInstance();
+        if (authenticator.authUsername(username)&&authenticator.authEmail(email)&&authenticator.authPassword(password)
+                &&authenticator.isDouble(monthlybudget)&&authenticator.isInteger(partynightsperweek)){
+            UserAccount userToAdd = new UserAccount(username,email,password,monthlybudget,partynightsperweek,accountnumber);
+            accountDatabase.save(userToAdd);
+            return userToAdd;
         }
-        return new UserAccount("error");
 
+        else {
+            return new UserAccount("error");
+        }
     }
 }
