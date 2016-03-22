@@ -17,7 +17,7 @@ public class UserAccountTest {
 
     @BeforeClass
     public static void setup() throws IOException {
-        user = UserAccount.createAccount("Drury", "pass3","bob@email.com", "56c66be6a73e492741507f89");
+        user = new UserAccount("Drury", "pass3","bob@email.com", "56c66be6a73e492741507f89");
     }
 
     @Before

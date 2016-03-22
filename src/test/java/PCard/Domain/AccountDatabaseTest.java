@@ -1,31 +1,31 @@
 package PCard.Domain;
 
+import PCard.Controllers.AccountCreationController;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by rkelly on 3/21/16.
  */
 public class AccountDatabaseTest {
+    @Autowired
+    AccountDatabase accountDatabase;
 
     static UserAccount user;
     @BeforeClass
     public static void setup() throws IOException {
-        user = UserAccount.createAccount("Drury", "pass3","bob@email.com", "56c66be6a73e492741507f89");
+        AccountCreationController accountCreationController = new AccountCreationController();
+        user = accountCreationController.userAccount("Drury");
     }
 
     @Test
     public void testAddUserToDB() throws Exception {
-        AccountDatabase.addUserToDB(user);
-        assertEquals("Drury", AccountDatabase.getUserAccounts().get(0).getUserName());
+        assertEquals("Drury", accountDatabase.findByUserName("Drury").get(0).getUserName());
     }
 
-    @Test
-    public void testGetUserAccounts() throws Exception {
-        //Forced to test in testAddUserToDB
-    }
 }

@@ -1,12 +1,10 @@
 package PCard.Domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name="users")
 public class UserAccount {
     double balance;
     private String userID, accountID,userName,password,email;
