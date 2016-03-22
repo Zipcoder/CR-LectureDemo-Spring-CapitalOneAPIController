@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class AccountDatabase {
+
     private static ArrayList<UserAccount> userAccounts = new ArrayList<UserAccount>();
 
     AccountDatabase() throws IOException {

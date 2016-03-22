@@ -10,6 +10,7 @@ import java.net.URLConnection;
 
 @RestController
 public class CapitalOneAPIController {
+
     private static String getUrlSource(String url) throws IOException {
         URL theURL = new URL(url);
         URLConnection urlC = theURL.openConnection();

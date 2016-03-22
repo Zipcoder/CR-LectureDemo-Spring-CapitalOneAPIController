@@ -6,6 +6,7 @@ import org.apache.catalina.User;
 import java.io.IOException;
 
 public class UserAccount {
+
     private double balance;
     private String userID, accountID,userName,password,email;
     private boolean authenticated = false;

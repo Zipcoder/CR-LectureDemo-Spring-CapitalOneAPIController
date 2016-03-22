@@ -3,6 +3,7 @@ package PCard.Domain;
 import java.util.ArrayList;
 
 public class Authentication {
+
     public static boolean authenticate(String userName, String password){
         ArrayList<UserAccount> accounts = AccountDatabase.getUserAccounts();
 
