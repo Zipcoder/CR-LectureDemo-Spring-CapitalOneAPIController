@@ -19,7 +19,7 @@ public class UserAccount {
     private long id;
     protected UserAccount(){}
 
-    public UserAccount(String userName, String email, String password, String monthlyBudget, String partyNights, String accountNumber) {
+    private UserAccount(String userName, String email, String password, String monthlyBudget, String partyNights, String accountNumber) {
         this.userName = userName;
         this.email = email;
         this.password = password;
@@ -28,6 +28,12 @@ public class UserAccount {
         this.accountNumber = accountNumber;
     }
 
+    public static UserAccount createAccount(String userName, String email, String password, String monthlyBudget, String partyNights, String accountNumber) throws IOException {
+        if (Authenticate.authUsername(userName) && Authenticate.authEmail(email)) {
+            return new UserAccount(userName, email, password, monthlyBudget, partyNights, accountNumber);
+        }
+        return null;
+    }
     public UserAccount(String userName){
         this.userName=userName;
     }

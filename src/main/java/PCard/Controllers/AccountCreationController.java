@@ -27,7 +27,7 @@ public class AccountCreationController {
         Authenticate authenticator = Authenticate.getInstance();
         if (authenticator.authUsername(username)&&authenticator.authEmail(email)&&authenticator.authPassword(password)
                 &&authenticator.isDouble(monthlybudget)&&authenticator.isInteger(partynightsperweek)){
-            UserAccount userToAdd = new UserAccount(username,email,password,monthlybudget,partynightsperweek,accountnumber);
+            UserAccount userToAdd = UserAccount.createAccount(username,email,password,monthlybudget,partynightsperweek,accountnumber);
             accountDatabase.save(userToAdd);
             return userToAdd;
         }
