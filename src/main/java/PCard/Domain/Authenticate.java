@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Authenticate {
 
     @Autowired
-    private AccountDatabase accountDatabase;
+    private static AccountDatabase accountDatabase;
 
     private static Authenticate instance;
 
@@ -18,7 +18,7 @@ public class Authenticate {
         return instance;
     }
 
-    public boolean authenticate(String userName, String password){
+    public static boolean authenticate(String userName, String password){
         ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
 
         for(UserAccount user:accounts) {
@@ -28,7 +28,7 @@ public class Authenticate {
         }
         return false;
     }
-    public boolean authUsername(String userName) {
+    public static boolean authUsername(String userName) {
         if (userName == null) {
             return false;
         }
@@ -40,7 +40,7 @@ public class Authenticate {
         else return false;
     }
 
-    public boolean authEmail(String email) {
+    public static boolean authEmail(String email) {
         if (email == null) {
             return false;
         }
@@ -52,7 +52,7 @@ public class Authenticate {
         else return false;
     }
 
-    public boolean authPassword(String password) {
+    public static boolean authPassword(String password) {
         if (password == null) {
             return false;
         }
@@ -62,7 +62,7 @@ public class Authenticate {
         else return false;
     }
 
-    public boolean isDouble(String input) {
+    public static boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
         } catch (NumberFormatException | NullPointerException e) {
@@ -71,7 +71,7 @@ public class Authenticate {
         return true;
     }
 
-    public boolean isInteger(String input) {
+    public static boolean isInteger(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException | NullPointerException e) {

@@ -1,5 +1,10 @@
 package PCard.Domain;
+import PCard.Controllers.CapitalOneAPIController;
+import org.apache.tomcat.util.net.jsse.openssl.Authentication;
+
 import javax.persistence.*;
+import java.io.IOException;
+
 
 @Entity
 @Table(name="users")
@@ -7,6 +12,7 @@ public class UserAccount {
     private double balance, monthlyBudget;
     private int partyNights;
     private String userID, accountID,userName,password,email,accountNumber;
+    private boolean authenticated;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,10 +45,6 @@ public class UserAccount {
     public int getPartyNights() {return partyNights;}
 
     public void setPartyNights(int partyNights) {this.partyNights = partyNights;}
-
-    public double getBalance() {
-        return balance;
-    }
 
     public void setBalance(double balance) {
         this.balance = balance;
@@ -82,6 +84,19 @@ public class UserAccount {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void authenticateUser(String userName, String password) {
+        authenticated = Authenticate.authenticate(userName,password);
+    }
+    public boolean checkAuthentication() {
+        return authenticated;
+    }
+    public double checkBalance() throws IOException {
+        if (authenticated == true) {
+            return CapitalOneAPIController.checkBalance(accountNumber);
+        }
+        return 0.0;
     }
 
     @Override
