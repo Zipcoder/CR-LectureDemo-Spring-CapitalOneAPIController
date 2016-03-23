@@ -9,4 +9,5 @@ public interface AccountDatabase extends CrudRepository<UserAccount, Long> {
     List<UserAccount> findByUserName(String userName);
     List<UserAccount> findByEmail(String email);
     List<UserAccount> findByAccountID(String accountID);
+    List<UserAccount> findByUserID(String userID);
 }

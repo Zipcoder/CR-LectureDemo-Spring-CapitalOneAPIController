@@ -58,10 +58,6 @@ public class UserAccount {
         return userID;
     }
 
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
     public String getAccountID() {
         return accountID;
     }
@@ -72,10 +68,6 @@ public class UserAccount {
 
     public String getUserName() {
         return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getPassword() {
@@ -117,5 +109,9 @@ public class UserAccount {
         return String.format(
                 "UserAccount[id=%d, userName='%s', email='%s']",
                 id, userName, email);
+    }
+
+    public double getBalance() {
+        return balance;
     }
 }
