@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class UserAccount {
     private double balance, monthlyBudget;
     private int partyNights;
-    private String userID, accountID,userName,password,email,accountNumber;
+    private String userName,password,email,accountNumber;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -48,22 +48,6 @@ public class UserAccount {
         this.balance = balance;
     }
 
-    public String getUserID() {
-        return userID;
-    }
-
-    public void setUserID(String userID) {
-        this.userID = userID;
-    }
-
-    public String getAccountID() {
-        return accountID;
-    }
-
-    public void setAccountID(String accountID) {
-        this.accountID = accountID;
-    }
-
     public String getUserName() {
         return userName;
     }
@@ -84,10 +68,12 @@ public class UserAccount {
         this.password = password;
     }
 
+    public long getId(){return this.id;}
+
     @Override
     public String toString() {
         return String.format(
-                "UserAccount[id=%d, userName='%s', email='%s']",
-                id, userName, email);
+                "UserAccount[id=%d, userName='%s', email='%s', accountNumber='%s']",
+                id, userName, email, accountNumber);
     }
 }
