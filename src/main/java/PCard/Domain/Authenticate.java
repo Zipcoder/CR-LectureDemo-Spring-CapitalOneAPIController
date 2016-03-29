@@ -1,7 +1,8 @@
 package PCard.Domain;
 import org.springframework.beans.factory.annotation.Autowired;
-import java.util.ArrayList;
+import org.springframework.web.bind.annotation.RestController;
 
+@RestController
 public class Authenticate {
 
     @Autowired
@@ -9,22 +10,25 @@ public class Authenticate {
 
     private static Authenticate instance;
 
-    private Authenticate(){};
+    private Authenticate(AccountDatabase accountDatabase){
+        this.accountDatabase = accountDatabase;
+    }
 
-    public static Authenticate getInstance(){
+    private Authenticate() {}
+
+    public static Authenticate getInstance(AccountDatabase accountDatabase){
         if(instance == null){
-            instance = new Authenticate();
+            instance = new Authenticate(accountDatabase);
         }
         return instance;
     }
 
     public boolean authenticate(String userName, String password){
-        ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
+        UserAccount user = accountDatabase.findByUserName(userName);
 
-        for(UserAccount user:accounts) {
-            if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-                return true;
-            }
+        if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
+            return true;
+
         }
         return false;
     }
@@ -34,8 +38,7 @@ public class Authenticate {
         }
 
         if (userName.matches("^[\\w]{6,15}")) {
-            ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByUserName(userName);
-            return accounts.isEmpty();
+            return accountDatabase.findByUserName(userName) == null;
         }
         else return false;
     }
@@ -46,8 +49,8 @@ public class Authenticate {
         }
 
         if (email.matches("[A-Za-z_0-9.%+-]{1,50}@[A-Za-z0-9.-]{1,50}\\.[a-zA-Z]{2,3}")) {
-            ArrayList<UserAccount> accounts = (ArrayList<UserAccount>) accountDatabase.findByEmail(email);
-            return accounts.isEmpty();
+            UserAccount account = accountDatabase.findByEmail(email);
+            return account == null;
         }
         else return false;
     }

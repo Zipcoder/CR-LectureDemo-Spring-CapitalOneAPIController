@@ -24,7 +24,7 @@ public class AccountCreationController {
         String partynightsperweek=requestParams.get("partynightsperweek");
 
         //perform DB operations
-        Authenticate authenticator = Authenticate.getInstance();
+        Authenticate authenticator = Authenticate.getInstance(accountDatabase);
         if (authenticator.authUsername(username)&&authenticator.authEmail(email)&&authenticator.authPassword(password)
                 &&authenticator.isDouble(monthlybudget)&&authenticator.isInteger(partynightsperweek)){
             UserAccount userToAdd = new UserAccount(username,email,password,monthlybudget,partynightsperweek,accountnumber);
